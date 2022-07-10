@@ -1,15 +1,14 @@
 import { useState } from "react";
 
-const AddTutorial = ({addTutorial}) => {
-
+const AddTutorial = ({ addTutorial }) => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
 
   const handleSubmit = (e) => {
-e.prevendefault();
-addTutorial({title:title,descripton:desc})
-setTitle("");
-setDesc('');
+    e.prevendefault();
+    addTutorial({ title: title, descripton: desc });
+    setTitle("");
+    setDesc("");
   };
 
   return (
