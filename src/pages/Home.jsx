@@ -36,12 +36,22 @@ const addTutorial =async(tutorial)=>{
    } catch (error) {
     console.log(error);
    }
+   getTutorails();
+}
+
+const deleteTutorial=async(id)=>{
+ try {
+    await axios.delete(`${url}/${id}`)
+ } catch (error) {
+    console.log(error);
+ }
+ getTutorails();
 }
 
   return (
     <div>
    <AddTutorial addTutorial = {addTutorial}/>
-   <TutorialList tutorials={tutorials}/>
+   <TutorialList tutorials={tutorials} deleteTutorial={deleteTutorial}/>
 
     </div>
   )
