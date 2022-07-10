@@ -48,10 +48,29 @@ const deleteTutorial=async(id)=>{
  getTutorails();
 }
 
+
+
+//! 
+
+
+
+const editTutorial = async(id,desc,title)=>{
+  const filtered =  tutorials.filter((tutor)=>tutor.id===id)
+  console.log(filtered);  
+  
+  try {
+        await axios.put(`${url}/${id}`)
+    } catch (error) {
+        console.log(error);
+    }
+    getTutorails();
+}
+
+
   return (
     <div>
    <AddTutorial addTutorial = {addTutorial}/>
-   <TutorialList tutorials={tutorials} deleteTutorial={deleteTutorial}/>
+   <TutorialList tutorials={tutorials} deleteTutorial={deleteTutorial} editTutorial={editTutorial}/>
 
     </div>
   )
