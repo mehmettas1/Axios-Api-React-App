@@ -55,11 +55,11 @@ const deleteTutorial=async(id)=>{
 
 
 const editTutorial = async(id,desc,title)=>{
-  const filtered =  tutorials.filter((tutor)=>tutor.id===id)
+  const filtered =  tutorials.filter((tutor)=>tutor.id===id).map(()=>({title:title,description:desc}))
   console.log(filtered);  
   
   try {
-        await axios.put(`${url}/${id}`)
+        await axios.put(`${url}/${id}`,filtered[0])
     } catch (error) {
         console.log(error);
     }

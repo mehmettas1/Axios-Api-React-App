@@ -27,7 +27,7 @@ const TutorialList = ({tutorials,deleteTutorial,editTutorial}) => {
                 <td>{title}</td>
                 <td>{description}</td>
                 <td className="text-center">
-                  <FaEdit size={20} className="me-3 text-warning " onClick={()=>editTutorial(id)} />
+                  <FaEdit size={20} className="me-3 text-warning " onClick={()=>editTutorial(id,"","")} />
                   <AiFillDelete size={22} className="text-danger cursor-pointer" onClick = {()=>deleteTutorial(id)}/>
                 </td>
               </tr>
