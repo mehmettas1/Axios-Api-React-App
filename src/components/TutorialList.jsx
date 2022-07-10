@@ -3,9 +3,8 @@ import { AiFillDelete } from 'react-icons/ai';
 
 const TutorialList = ({tutorials}) => {
   //? Test data
-  let tutorials = [
-   
-  ];
+  // let tutorials = [
+  // ];
   return (
     <div className="container mt-4">
       <table className="table table-striped">
