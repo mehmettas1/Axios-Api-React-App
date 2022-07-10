@@ -11,20 +11,36 @@ import TutorialList from "../components/TutorialList"
 const Home = () => {
     const [tutorials, setTutorials] = useState()
     const url = 'https://cw-axios-example.herokuapp.com/api/tutorials';
-
+    
     const getTutorails =async()=>{
-        const {data} = await axios.get(url)
-        setTutorials(data)
+        try {
+            const {data} = await axios.get(url)
+                setTutorials(data)
+        } catch (error) {
+            console.log(error);
+        }
+        
     }
+
+
+    
+    
 
 useEffect(() => {
   getTutorails()
 }, [])
 
+const addTutorial =async(tutorial)=>{
+   try {
+    await axios.post(url,tutorial)
+   } catch (error) {
+    console.log(error);
+   }
+}
 
   return (
     <div>
-   <AddTutorial/>
+   <AddTutorial addTutorial = {addTutorial}/>
    <TutorialList tutorials={tutorials}/>
 
     </div>
