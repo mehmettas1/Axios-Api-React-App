@@ -1,12 +1,14 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import AddTutorial from "../components/AddTutorial";
-import TutorialList from "../components/TutorialList";
+import AddTutorial from '../components/AddTutorial';
+import TutorialList from '../components/TutorialList';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 const Home = () => {
   const [tutorials, setTutorials] = useState();
-  const url = "https://cw-axios-example.herokuapp.com/api/tutorials";
 
+  const url = 'https://tutorials-api-cw.herokuapp.com/api/tutorials';
+
+  //! GET (Read)
   const getTutorials = async () => {
     try {
       const { data } = await axios.get(url);
@@ -16,10 +18,14 @@ const Home = () => {
     }
   };
 
+  //? Sadece Component mount oldugunda istek yapar
   useEffect(() => {
     getTutorials();
   }, []);
 
+  console.log(tutorials);
+
+  //! POST (Create)
   const addTutorial = async (tutorial) => {
     try {
       await axios.post(url, tutorial);
@@ -29,6 +35,7 @@ const Home = () => {
     getTutorials();
   };
 
+  //! DELETE (delete)
   const deleteTutorial = async (id) => {
     try {
       await axios.delete(`${url}/${id}`);
@@ -38,14 +45,16 @@ const Home = () => {
     getTutorials();
   };
 
-  //!
-
-  const editTutorial = async (id, desc, title) => {
-    const filtered = tutorials
+  //! Update (PUT:Whole Update,PATCH :Partially Update)
+  const editTutorial = async (id, title, desc) => {
+    //! Bu kisma gerek yok aslinda degistirmek istedigimiz
+    //! veriler alt componentten geliyor. Dolayısiyla
+    //! dogurdan axios istegini gonderebiliriz
+    // const filtered = tutorials
     //   .filter((tutor) => tutor.id === id)
     //   .map((item) => ({ title: title, description: desc }));
-    // console.log(filtered);
 
+    // console.log(filtered);
     try {
       await axios.put(`${url}/${id}`, { title, description: desc });
     } catch (error) {
@@ -55,14 +64,14 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <>
       <AddTutorial addTutorial={addTutorial} />
       <TutorialList
         tutorials={tutorials}
         deleteTutorial={deleteTutorial}
         editTutorial={editTutorial}
       />
-    </div>
+    </>
   );
 };
 

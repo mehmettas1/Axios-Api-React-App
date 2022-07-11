@@ -1,24 +1,35 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-const EditTutorial = ({editTutorial,editItem}) => {
+const EditTutorial = ({ editTutorial, editItem }) => {
+  const { id, title: newTitle, description } = editItem;
+
   const [title, setTitle] = useState(newTitle);
   const [desc, setDesc] = useState(description);
-  const {id,title:newTitle,description}= editItem;
 
+  //? https://reactjs.org/docs/hooks-reference.html#usestate
+  //! State degiskeninin degeri, 1.render ile initialState
+  //! parametresinin ilk degerini alir. Dolayisiyle bu durumda
+  //! prop'tan gelen ilk deger state'e aktarilir.
+  //! Sonradan degisen props degerleri useState'e aktarilmaz.
+  //! Eger props'tan gelen degerleri her degisimde useState'e
+  //! aktarmak istersek useEffect hook'unu componentDidUpdate
+  //! gibi kullanabiriz.
+
+  //? componentDidUpdate
+  //? newTitle veya description her degistiginde local title ve
+  //? desc state'lerimizi gunceliyoruz.
   useEffect(() => {
     setTitle(newTitle);
     setDesc(description);
-  }, [newTitle,description])
-  
-
-
+  }, [newTitle, description]);
 
   const handleSave = (e) => {
-    e.prevendefault();
-    editTutorial({id,title,description})
-    setTitle("");
-    setDesc("");
+    e.preventDefault();
+    editTutorial(id, title, desc);
+    setTitle('');
+    setDesc('');
   };
+
   return (
     <div className="modal" tabIndex="-1" id="edit-modal">
       <div className="modal-dialog">
@@ -42,7 +53,7 @@ const EditTutorial = ({editTutorial,editItem}) => {
                 className="form-control"
                 id="title"
                 placeholder="Enter your title"
-                value={title || ""}
+                value={title || ''}
                 onChange={(e) => setTitle(e.target.value)}
                 required
               />
@@ -56,7 +67,7 @@ const EditTutorial = ({editTutorial,editItem}) => {
                 className="form-control"
                 id="desc"
                 placeholder="Enter your Description"
-                value={desc || ""}
+                value={desc || ''}
                 onChange={(e) => setDesc(e.target.value)}
                 required
               />
