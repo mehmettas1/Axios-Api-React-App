@@ -1,12 +1,21 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
-const EditTutorial = (editTutorial) => {
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
+const EditTutorial = ({editTutorial,editItem}) => {
+  const [title, setTitle] = useState(newTitle);
+  const [desc, setDesc] = useState(description);
+  const {id,title:newTitle,description}= editItem;
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    setTitle(newTitle);
+    setDesc(description);
+  }, [newTitle,description])
+  
+
+
+
+  const handleSave = (e) => {
     e.prevendefault();
-    editTutorial({id:id,title:title,descripton:desc})
+    editTutorial({id,title,description})
     setTitle("");
     setDesc("");
   };
@@ -33,7 +42,7 @@ const EditTutorial = (editTutorial) => {
                 className="form-control"
                 id="title"
                 placeholder="Enter your title"
-                value={title}
+                value={title || ""}
                 onChange={(e) => setTitle(e.target.value)}
                 required
               />
@@ -47,7 +56,7 @@ const EditTutorial = (editTutorial) => {
                 className="form-control"
                 id="desc"
                 placeholder="Enter your Description"
-                value={desc}
+                value={desc || ""}
                 onChange={(e) => setDesc(e.target.value)}
                 required
               />
@@ -57,6 +66,7 @@ const EditTutorial = (editTutorial) => {
             <button
               type="button"
               className="btn btn-primary"
+              onClick={handleSave}
               data-bs-dismiss="modal"
             >
               Save

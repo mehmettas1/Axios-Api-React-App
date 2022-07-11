@@ -43,7 +43,7 @@ const Home = () => {
   const editTutorial = async (id, desc, title) => {
     const filtered = tutorials
       .filter((tutor) => tutor.id === id)
-      .map(() => ({ title: title, description: desc }));
+      .map((item) => ({ title: title, description: desc }));
     console.log(filtered);
 
     try {
