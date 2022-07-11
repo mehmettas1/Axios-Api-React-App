@@ -8,9 +8,7 @@ import { useState } from "react";
 const TutorialList = ({ tutorials, deleteTutorial, editTutorial }) => {
 
   const [editItem, setEditItem] = useState("")
-  //? Test data
-  // let tutorials = [
-  // ];
+  
   return (
     <div className="container mt-4">
       <table className="table table-striped">
@@ -34,11 +32,11 @@ const TutorialList = ({ tutorials, deleteTutorial, editTutorial }) => {
                 <td>{description}</td>
                 <td className="text-center">
                   <FaEdit
-                    size={20}
-                    className="me-3 text-warning "
-                    onClick={() => setEditItem(item)}
                     data-bs-toggle="modal"
                     data-bs-target="#edit-modal"
+                    size={20}
+                    className="me-2 text-warning cursor-pointer"
+                    onClick={() => setEditItem(item)}
                   />
 
                   <AiFillDelete
